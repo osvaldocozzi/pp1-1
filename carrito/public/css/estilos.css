@@ -1,9 +1,11 @@
-.header{
-    background-color: red;
-}
 
 .lista{
-    display: inline-flex;
-    justify-content: space-between;
-    background-color: red;
+    display: grid;
+    grid-template-columns:repeat(5, 200px);
+    grid-template-rows: 340px 40px repeat(2, 230px) 60px;/* fr */
+    row-gap: 5px;
+    column-gap: 10px;
+    gap:50px;
+
+    
 }
