@@ -5,14 +5,27 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Negocio\Almacen;
+use App\Entity\Product;
+use App\Repository\ProductRepository;
 
 class ProductoController extends AbstractController
 {
  /**
+ * @Route("/product/{id}", name="product_show")
+ */
+public function listarProductos(ManagerRegistry $doctrine, $id): Response
+{
+   $repositorio = $doctrine->getRepository(Product::class);
+   $product = $repositorio->findAll();
+if (!$product) {
+throw $this->createNotFoundException('No existe');
+}
+}
+ 
+ /**
  * @Route("/", name="listar_productos")
  */
- public function listarProductos(Almacen $alma): Response
+ public function listarProducto(ManagerRegistry $doctrine, $id): Response
  {
     $productos = $alma->findAll();
 
@@ -23,7 +36,7 @@ class ProductoController extends AbstractController
  /**
  * @Route("/producto/{id}", name="detalle_producto")
  */
-public function detalleProducto(Almacen $alma, $id): Response
+public function detalleProducto(ManagerRegistry $doctrine, $id): Response
 {
    $producto = $alma->find($id);
 
