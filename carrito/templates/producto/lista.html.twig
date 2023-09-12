@@ -17,7 +17,7 @@
 {% for producto in productos %}
 <li class="listap">
 <div>
-    <img  src={{producto.imagen}}  />
+    <img  src="{{ asset(producto.imagen) }}"  />
 </div>
 <div>
     <h1>Producto {{producto.id}}</h1>
