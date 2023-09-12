@@ -5,42 +5,38 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Product;
-use App\Repository\ProductRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Producto;
+
+
 
 class ProductoController extends AbstractController
 {
  /**
- * @Route("/product/{id}", name="product_show")
- */
-public function listarProductos(ManagerRegistry $doctrine, $id): Response
-{
-   $repositorio = $doctrine->getRepository(Product::class);
-   $product = $repositorio->findAll();
-if (!$product) {
-throw $this->createNotFoundException('No existe');
-}
-}
- 
- /**
  * @Route("/", name="listar_productos")
  */
- public function listarProducto(ManagerRegistry $doctrine, $id): Response
+ public function listarProductos(ManagerRegistry $doctrine): Response
  {
-    $productos = $alma->findAll();
+    $repository = $doctrine->getRepository(Producto::class);
+    $productos = $repository->findAll();
 
- return $this->render('producto/lista.html.twig', ['productos' => $productos]);
+    return $this->render('producto/lista.html.twig', ['productos' => $productos]);
 
  }
 
  /**
  * @Route("/producto/{id}", name="detalle_producto")
  */
-public function detalleProducto(ManagerRegistry $doctrine, $id): Response
+public function detalleProducto(ManagerRegistry $doctrine, int $id): Response
 {
-   $producto = $alma->find($id);
+   $repository = $doctrine->getRepository(Producto::class);
+   $producto = $repository->find($id);
 
-return $this->render('producto/detalle.html.twig', ['productoDeta' => $producto]);
+   if (!$producto) {
+      throw $this->createNotFoundException('no existe');
+   }
+
+   return $this->render('producto/detalle.html.twig', ['productoDeta' => $producto]);
 
 }
 
