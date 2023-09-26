@@ -2,14 +2,10 @@
 
 {% block body %} 
 
-
+{% include 'header.html.twig' %}
 <div class = 'app'>
 
-<div class="header">
-    <span class = "title">Carrito de compras</span>
-    <a href="" class="btn-light">Salir</a>
-    <a href="" class="btn-light">Ver Carrito</a>
-</div>
+
 
 <h2>Lista Productos</h2>
 
@@ -17,10 +13,10 @@
 {% for producto in productos %}
 <li class="listap">
 <div>
-    <img  src="{{ asset(producto.imagen) }}"  />
+    <img  src="{{ asset(producto.imagen) }}" alt="{{ producto.nombre }}">
 </div>
 <div>
-    <h1>Producto {{producto.id}}</h1>
+    <h1>Producto {{producto.nombre}}</h1>
     <p>Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de 
     borradoresholaaaaa</p>
     <a href="{{ path('detalle_producto', {id: producto.id}) }}">Ver Detalles</a>

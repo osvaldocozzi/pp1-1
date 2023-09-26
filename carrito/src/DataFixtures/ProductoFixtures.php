@@ -20,7 +20,7 @@ class ProductoFixtures extends Fixture
             $producto->setNombre('producto '.$i);
             $producto->setPrecio(mt_rand(10, 100));
             $producto->setDescripcion('Descripcion producto');
-            $producto->setImagen('/imagen/producto'.$i.'.jpg');
+            $producto->setImagen('imagenes/producto'.$i.'.jpg');
             $manager->persist($producto);
         }
         $manager->flush();
